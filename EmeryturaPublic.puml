@@ -1,0 +1,488 @@
+﻿### Skróty i składowe, bez filarów i kolorów, publiczny
+
+@startuml skroty
+    top to bottom direction
+    'left to right direction
+    'skinparam linetype ortho
+    skinparam linetype polyline
+    mainframe emerytura w Polsce, stan na 2024
+
+    rectangle emerytura
+
+    together {
+        rectangle ZUS
+        note bottom
+            Zakład 
+            Ubezpieczeń 
+            Społecznych
+        end note
+
+        rectangle OFE 
+        note bottom
+            Otwarty 
+            Fundusz 
+            Emerytalny
+        end note
+    }
+
+    together {
+        rectangle PPK
+        note bottom
+		Pracownicze 
+		Plany 
+		Kapitałowe
+        end note
+
+        rectangle PPE
+        note bottom
+		Pracowniczy 
+		Program
+		Emerytalny
+        end note
+    }	
+
+    together {
+        rectangle IKE 
+        note bottom
+            Indywidualne 
+            Konto 
+            Emerytalne
+        end note
+
+        rectangle IKZE 
+        note bottom
+		Indywidualne 
+		Konto 
+		Zabezpieczenia 
+		Emerytalnego
+        end note
+
+
+        rectangle OIPE 
+        note bottom
+		Ogólnoeuropejski 
+		Indywidualny 
+		Produkt 
+		Emerytalny
+        end note
+    }
+
+    emerytura *--> ZUS
+    emerytura *--> OFE
+    emerytura *--> IKE 
+    emerytura *--> IKZE 
+    emerytura *--> PPK 
+    emerytura *--> PPE
+    emerytura *--> OIPE 
+@enduml
+
+---
+
+### Filary i składowe, publiczny
+
+@startuml filary
+    top to bottom direction
+    'left to right direction
+    'skinparam linetype ortho
+    skinparam linetype polyline
+    mainframe emerytura w Polsce\nstan na **2024**
+
+	legend top left
+	Kolory:
+		<color:green>zielony</color> = mam
+		<color:red>czerwony</color> = nie mam
+	end legend
+
+    rectangle emerytura
+
+    rectangle "pierwszy\nfilar" 	as f1
+    rectangle "drugi\nfilar"		as f2
+    rectangle "trzeci\nfilar"		as f3
+
+        rectangle ZUS 		
+
+        rectangle ZUS2 		
+        rectangle OFE 		
+
+        rectangle PPK 		
+        rectangle PPE 		
+        rectangle IKE 		
+        rectangle IKZE 		
+        rectangle OIPE 		
+
+    emerytura	*--> f1
+    emerytura	*--> f2
+    emerytura	*--> f3
+    f1 		*--> ZUS
+    f2 		*--> ZUS2
+    f2 		*--> OFE
+    f3 		*--> IKE 
+    f3 		*--> IKZE 
+    f3 		*--> PPK 
+    f3 		*--> PPE
+    f3 		*--> OIPE 
+@enduml
+
+---
+
+### Obowiązkowe i nieobowiązkowe, publiczny
+
+@startuml ObowNieobow
+    top to bottom direction
+    'left to right direction
+    'skinparam linetype ortho
+    skinparam linetype polyline
+    mainframe emerytura w Polsce,\nstan na **2024**
+
+	/'
+	legend top left
+	Kolory:
+		<color:green>zielony</color> = mam
+		<color:red>czerwony</color> = nie mam
+	end legend
+	'/
+
+    rectangle emerytura
+
+    rectangle "pierwszy\nfilar" 	as f1
+    rectangle "drugi\nfilar"		as f2
+    rectangle "trzeci\nfilar"		as f3
+
+	rectangle obowiazkowe {
+        rectangle ZUS 		
+
+        rectangle ZUS2 		
+        rectangle OFE 		
+	}
+
+	rectangle nieobowiązkowe {
+        rectangle PPK 		
+        rectangle PPE
+        rectangle IKE 		
+        rectangle IKZE 		
+        rectangle OIPE 		
+	}
+
+    emerytura	*--> f1
+    emerytura	*--> f2
+    emerytura	*--> f3
+    f1 		*--> ZUS
+    f2 		*--> ZUS2
+    f2 		*--> OFE
+    f3 		*--> IKE 
+    f3 		*--> IKZE 
+    f3 		*--> PPK 
+    f3 		*--> PPE
+    f3 		*--> OIPE 
+@enduml
+
+---
+
+### Wszystko razem, publiczny
+
+@startuml WszystkoRazem
+    top to bottom direction
+    'left to right direction
+    'skinparam linetype ortho
+    skinparam linetype polyline
+    mainframe emerytura w Polsce,\ndata urodzenia `xx
+
+	legend top left
+	Kolory:
+		<color:green>zielony</color> = mam
+		<color:red>czerwony</color> = nie mam
+	end legend
+
+    object emerytura {
+		stan na : **2024-xx-xx**
+		początek emerytury : **2050**
+		stopa zastąpienia : **29,5**%
+    }
+
+        object ZUS #green {
+	   	//properties//
+		filar : pierwszy
+		charakter : repartycyjny
+		obowiązkowe : tak
+		mam : tak
+		składka : **12,22**%  
+	   }
+
+        object ZUS2 #green {
+	   	//properties//
+		filar : drugi
+		charakter : kapitałowy (subkonto)
+		obowiązkowe : tak
+		mam : tak
+		składka : **4,38**%  
+	   }
+
+
+        object OFE #green {
+	   	//properties//
+		filar : drugi
+		charakter : kapitałowy
+		obowiązkowe : tak
+		mam : tak
+		składka : **2,92**%
+	   }	   
+        note bottom
+		możliwa zmiana decyzji
+		co 4 lata
+        end note
+
+        object PPK #green {
+	   	//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : tak
+		stan : xxx
+		operator : xxx
+	   }	   
+
+	object PPE {
+		//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : nie
+	}	
+
+	together {
+        object IKE {
+	   	//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : nie
+		limit 2024 : **23 472** PLN 
+	   }	   
+
+        object IKZE {
+	   	//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : nie
+		limit 2024 : **9 388,80** PLN 
+	   }	   
+
+        object OIPE {
+	   	//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : nie
+		limit 2024 : **21 312** PLN 
+	   }	   
+	}
+
+    emerytura *-> 	ZUS
+    emerytura *--> 	OFE
+    emerytura *--> 	ZUS2
+    emerytura *---> PPK 
+    emerytura *---> PPE
+    emerytura *---> IKE 
+    emerytura *---> IKZE 
+    emerytura *---> OIPE 
+@enduml
+
+---
+
+### Wszystko razem, kategorie IKE, publiczny
+
+@startuml IKEpubliczny
+    top to bottom direction
+    'left to right direction
+    'skinparam linetype ortho
+    skinparam linetype polyline
+    mainframe emerytura w Polsce,\ndata urodzenia `xx
+
+	legend top left
+	Kolory:
+		<color:green>zielony</color> = mam
+		<color:red>czerwony</color> = nie mam
+		szary = nie określono
+	end legend
+
+    object emerytura {
+		stan na : **2024-xx-xx**
+		początek emerytury : **2050**
+		stopa zastąpienia : **29,5**%
+    }
+
+        object ZUS #green {
+	   	//properties//
+		filar : pierwszy
+		charakter : repartycyjny
+		obowiązkowe : tak
+		mam : tak
+		składka : **12,22**%  
+	   }
+
+        object ZUS2 #green {
+	   	//properties//
+		filar : drugi
+		charakter : kapitałowy (subkonto)
+		obowiązkowe : tak
+		mam : tak
+		składka : **4,38**%  
+	   }
+
+
+        object OFE #green {
+	   	//properties//
+		filar : drugi
+		charakter : kapitałowy
+		obowiązkowe : tak
+		mam : tak
+		składka : **2,92**%
+	   }	   
+        note bottom
+		możliwa zmiana decyzji
+		co 4 lata
+        end note
+
+        object PPK #green {
+	   	//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : tak
+		stan : xxx
+		operator : xxx
+	   }	   
+
+	object PPE {
+		//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : nie
+	}	
+
+	together {
+        object IKE {
+	   	//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : nie
+		limit 2024 : **23 472** PLN 
+	   }	   
+
+        object IKZE {
+	   	//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : nie
+		limit 2024 : **9 388,80** PLN 
+	   }	   
+
+        object OIPE {
+	   	//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : nie
+		limit 2024 : **21 312** PLN 
+	   }	   
+	}
+
+	object "polisy z UFK" as UFK {
+		//properties//
+	}
+	note bottom
+		Ubezpieczeniowy Fundusz Kapitałowy
+	end note
+	object DFE {
+		//properties//
+	}
+	note bottom
+		Dobrowolny Fundusz Emerytalny
+	end note
+	object "rachunek inwestycyjny\nw biurze maklerskim" as ribm {
+		//properties//
+	}
+	object "detaliczne\nobligacje skarbowe" as dos {
+		//properties//
+	}
+	object "konto oszczędnościowe\nw banku" as kowb {
+		//properties//
+	}
+	object "fundusze inwestycyjne\noferowane przez TFI" as fi {
+		//properties//
+	}
+	note bottom
+		Towarzystwo Funduszy Inwestycyjnych
+	end note
+	
+
+    emerytura *-> 	ZUS
+    emerytura *--> 	OFE
+    emerytura *--> 	ZUS2
+    emerytura *---> PPK 
+    emerytura *---> PPE
+    emerytura *---> IKE 
+    emerytura *---> IKZE 
+    emerytura *---> OIPE 
+
+    IKE	<|--		UFK 		: {complete, disjoint}
+    IKE	<|--		DFE 		: {complete, disjoint}
+    IKE	<|--		ribm		: {complete, disjoint}
+    IKE	<|--		dos		: {complete, disjoint}
+    IKE	<|--		kowb		: {complete, disjoint}
+    IKE	<|--		fi		: {complete, disjoint}
+@enduml
+
+---
+
+@startuml IKE_Kategorie
+    top to bottom direction
+    'left to right direction
+    'skinparam linetype ortho
+    skinparam linetype polyline
+    mainframe emerytura w Polsce,\ndata urodzenia `xx
+
+	legend top left
+	Kolory:
+		<color:green>zielony</color> = mam
+		<color:red>czerwony</color> = nie mam
+		szary = nie określono
+	end legend
+
+        object IKE {
+	   	//properties//
+		filar : trzeci
+		obowiązkowe : nie
+		mam : nie
+		limit 2024 : **23 472** PLN 
+	   }	   
+
+	object "polisy z UFK" as UFK {
+		//properties//
+	}
+	note bottom
+		Ubezpieczeniowy Fundusz Kapitałowy
+	end note
+	object DFE {
+		//properties//
+	}
+	note bottom
+		Dobrowolny Fundusz Emerytalny
+	end note
+	object "rachunek inwestycyjny\nw biurze maklerskim" as ribm {
+		//properties//
+	}
+	object "detaliczne\nobligacje skarbowe" as dos {
+		//properties//
+	}
+	object "konto oszczędnościowe\nw banku" as kowb {
+		//properties//
+	}
+	object "fundusze inwestycyjne\noferowane przez TFI" as fi {
+		//properties//
+	}
+	note bottom
+		Towarzystwo Funduszy Inwestycyjnych
+	end note
+	
+    IKE	<|--		UFK 		: {complete, disjoint}
+    IKE	<|--		DFE 		: {complete, disjoint}
+    IKE	<|--		ribm		: {complete, disjoint}
+    IKE	<|--		dos		: {complete, disjoint}
+    IKE	<|--		kowb		: {complete, disjoint}
+    IKE	<|--		fi		: {complete, disjoint}
+@enduml
